@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://4kynwvi8xlkc"]
+
+[ext_resource type="Script" uid="uid://b8l8d6l3xg8kj" path="res://addons/dialogue/scripts/localization_manager.gd" id="1_l10g4"]
+[ext_resource type="Script" uid="uid://j0m3anufhvms" path="res://addons/dialogue/scripts/language.gd" id="2_cj7h6"]
+
+[sub_resource type="Resource" id="Resource_40wkc"]
+script = ExtResource("2_cj7h6")
+locale = "en_US"
+texts = "Hello!;Hey.;How are you?;I'm good;I'm tired;I'm good.;I'm tired.;I don't know."
+metadata/_custom_type_script = "uid://j0m3anufhvms"
+
+[node name="localization_manager" type="Node"]
+editor_description = "1- The first language is the default; the rest are translations.
+
+2-  Use set_language() to override the device’s language (commonly used in a settings menu)."
+script = ExtResource("1_l10g4")
+languages = Array[ExtResource("2_cj7h6")]([SubResource("Resource_40wkc")])

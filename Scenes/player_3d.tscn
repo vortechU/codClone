@@ -1,0 +1,29 @@
+[gd_scene load_steps=7 format=3 uid="uid://cv1xymwpsfdhv"]
+
+[ext_resource type="Script" uid="uid://b8dvk4ki7d4pk" path="res://Scenes/player_3d.gd" id="1_ryx18"]
+[ext_resource type="PackedScene" uid="uid://bse30k5201pyh" path="res://Scenes/health.tscn" id="2_85mps"]
+[ext_resource type="PackedScene" uid="uid://q3h8qlo4jt4r" path="res://Scenes/gun.tscn" id="2_pll4t"]
+[ext_resource type="PackedScene" uid="uid://b4ymtrullq2dh" path="res://Scenes/UIsc.tscn" id="4_hsehg"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_lnogm"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ryx18"]
+
+[node name="Player3D" type="CharacterBody3D" groups=["Player"]]
+script = ExtResource("1_ryx18")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_lnogm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_ryx18")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.61453605, 0)
+
+[node name="AK47" parent="Camera3D" instance=ExtResource("2_pll4t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.38941622, -0.1449616, -0.71087426)
+
+[node name="Health" parent="." instance=ExtResource("2_85mps")]
+
+[node name="UI" parent="." instance=ExtResource("4_hsehg")]

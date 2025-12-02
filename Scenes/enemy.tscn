@@ -1,0 +1,27 @@
+[gd_scene load_steps=7 format=3 uid="uid://cns0pvih2o6fm"]
+
+[ext_resource type="Script" uid="uid://dmtoct62ovlel" path="res://Scenes/enemy.gd" id="1_hghv2"]
+[ext_resource type="PackedScene" uid="uid://bse30k5201pyh" path="res://Scenes/health.tscn" id="2_1f0kj"]
+[ext_resource type="PackedScene" uid="uid://d06afr30o5mjq" path="res://Scenes/power_up.tscn" id="2_afpow"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hghv2"]
+albedo_color = Color(0.99999994, 0.5006206, 0.25835195, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ne65n"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hghv2"]
+
+[node name="Enemy" type="CharacterBody3D" groups=["enemies"]]
+script = ExtResource("1_hghv2")
+power_up_scenes = Array[PackedScene]([ExtResource("2_afpow")])
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_hghv2")
+mesh = SubResource("CapsuleMesh_ne65n")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_hghv2")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="Health" parent="." instance=ExtResource("2_1f0kj")]

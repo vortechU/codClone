@@ -1,0 +1,140 @@
+[gd_scene load_steps=5 format=3 uid="uid://bmeiv1c8q5tey"]
+
+[ext_resource type="Script" uid="uid://bua1yivsbr1yu" path="res://addons/dialogue/scripts/dialogue_manager.gd" id="1_wph7u"]
+[ext_resource type="Texture2D" uid="uid://cvotg4t0lm26a" path="res://icon.svg" id="2_t1g4f"]
+[ext_resource type="PackedScene" uid="uid://bw6meo84a6fwd" path="res://addons/dialogue/scenes/button.tscn" id="2_x5iar"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ippp5"]
+content_margin_left = 15.0
+content_margin_right = 15.0
+bg_color = Color(0.211765, 0.239216, 0.321569, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.129412, 0.145098, 0.196078, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[node name="dialogue_manager" type="Node"]
+script = ExtResource("1_wph7u")
+avatar_ = ExtResource("2_t1g4f")
+avatar__ = ExtResource("2_t1g4f")
+
+[node name="Subtitle" type="VBoxContainer" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -300.0
+offset_top = -120.0
+offset_right = 300.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 2
+
+[node name="GridContainer" type="GridContainer" parent="Subtitle"]
+layout_mode = 2
+columns = 2
+
+[node name="Button" parent="Subtitle/GridContainer" instance=ExtResource("2_x5iar")]
+layout_mode = 2
+
+[node name="Button2" parent="Subtitle/GridContainer" instance=ExtResource("2_x5iar")]
+layout_mode = 2
+text = "I'm tired"
+
+[node name="ProgressBar" type="ProgressBar" parent="Subtitle"]
+layout_mode = 2
+step = 1.0
+value = 100.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Subtitle"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Subtitle/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Character:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Subtitle/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "How are you?"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextBox" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TextBox"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.066
+anchor_top = 0.133
+anchor_right = 0.934
+anchor_bottom = 0.923
+offset_left = -0.0319977
+offset_top = -0.183998
+offset_right = 0.0319824
+offset_bottom = -0.104004
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="TextureRect" type="TextureRect" parent="TextBox/HBoxContainer"]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 2
+texture = ExtResource("2_t1g4f")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TextBox/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="Label" type="Label" parent="TextBox/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_ippp5")
+text = "Character"
+
+[node name="Label2" type="Label" parent="TextBox/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_ippp5")
+text = "How are you?"
+autowrap_mode = 3
+
+[node name="click_detector" type="Button" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[node name="message_timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="choice_timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="pressed" from="click_detector" to="." method="_on_click_detector_pressed"]
+[connection signal="timeout" from="message_timer" to="." method="_on_message_timer_timeout"]
+[connection signal="timeout" from="choice_timer" to="." method="_on_choice_timer_timeout"]

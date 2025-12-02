@@ -1,0 +1,102 @@
+[gd_scene load_steps=13 format=3 uid="uid://bw5s0cjlg4w0k"]
+
+[ext_resource type="PackedScene" uid="uid://cv1xymwpsfdhv" path="res://Scenes/player_3d.tscn" id="1_10lpn"]
+[ext_resource type="Texture2D" uid="uid://2ylblo15qcta" path="res://HDRIs/citrus_orchard_road_puresky_4k.hdr" id="2_ovy8i"]
+[ext_resource type="PackedScene" uid="uid://cns0pvih2o6fm" path="res://Scenes/enemy.tscn" id="3_d8tg7"]
+[ext_resource type="PackedScene" uid="uid://b0u50hwuifui6" path="res://Scenes/round_manager.tscn" id="4_vh5rs"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_d8tg7"]
+panorama = ExtResource("2_ovy8i")
+
+[sub_resource type="Sky" id="Sky_10lpn"]
+sky_material = SubResource("PanoramaSkyMaterial_d8tg7")
+
+[sub_resource type="Environment" id="Environment_ovy8i"]
+background_mode = 2
+background_energy_multiplier = 0.39
+sky = SubResource("Sky_10lpn")
+ssr_enabled = true
+ssao_enabled = true
+ssil_enabled = true
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_ovy8i"]
+vertices = PackedVector3Array(-20.932676, -0.4992559, 13.302826, -14.182676, -0.4992559, 13.552826, -13.932676, -0.4992559, 11.802826, -20.932676, -0.4992559, -103.947174, 10.817324, -0.4992559, 11.802826, 11.067324, -0.4992559, 13.552826, 20.817324, -0.4992559, 13.302826, 20.817324, -0.4992559, -103.947174, -7.1826763, -0.4992559, 11.802826, -6.9326763, -0.4992559, 13.802826, 3.8173237, -0.4992559, 13.802826, 4.0673237, -0.4992559, 11.802826, -13.182676, 3.500744, 12.802826, -13.182676, 3.500744, 40.802826, -7.9326763, 3.500744, 40.802826, -7.9326763, 3.500744, 12.802826, 4.8173237, 5.500744, 12.802826, 4.8173237, 5.500744, 40.802826, 10.067324, 5.500744, 40.802826, 10.067324, 5.500744, 12.802826, -12.932676, -0.4992559, 13.052826, -12.932676, -0.4992559, 40.552826, -8.182676, -0.4992559, 40.552826, -8.182676, -0.4992559, 13.052826, -20.932676, -0.4992559, 40.302826, -14.182676, -0.4992559, 40.052826, 11.067324, -0.4992559, 40.052826, 20.817324, -0.4992559, 40.302826, -6.9326763, -0.4992559, 39.802826, 3.8173237, -0.4992559, 39.802826, -13.932676, -0.4992559, 41.802826, -20.682676, -0.4992559, 104.052826, 10.817324, -0.4992559, 41.802826, 20.817324, -0.4992559, 104.052826, 4.0673237, -0.4992559, 41.802826, -7.1826763, -0.4992559, 41.802826)
+polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(5, 4, 6), PackedInt32Array(6, 4, 7), PackedInt32Array(9, 8, 10), PackedInt32Array(10, 8, 11), PackedInt32Array(8, 3, 11), PackedInt32Array(11, 3, 7), PackedInt32Array(8, 2, 3), PackedInt32Array(7, 4, 11), PackedInt32Array(15, 14, 12), PackedInt32Array(12, 14, 13), PackedInt32Array(19, 18, 16), PackedInt32Array(16, 18, 17), PackedInt32Array(23, 22, 20), PackedInt32Array(20, 22, 21), PackedInt32Array(25, 24, 1), PackedInt32Array(1, 24, 0), PackedInt32Array(5, 6, 26), PackedInt32Array(26, 6, 27), PackedInt32Array(9, 10, 28), PackedInt32Array(28, 10, 29), PackedInt32Array(25, 30, 24), PackedInt32Array(24, 30, 31), PackedInt32Array(26, 27, 32), PackedInt32Array(32, 27, 33), PackedInt32Array(29, 34, 28), PackedInt32Array(28, 34, 35), PackedInt32Array(35, 34, 31), PackedInt32Array(31, 34, 33), PackedInt32Array(31, 30, 35), PackedInt32Array(34, 32, 33)]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ovy8i"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ovy8i"]
+size = Vector3(5.9626465, 4.0083923, 28.901367)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ovy8i"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_10lpn"]
+size = Vector3(42.841797, 0.18847656, 208.11621)
+
+[node name="LevelTest" type="Node3D"]
+
+[node name="Player3D" parent="." instance=ExtResource("1_10lpn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2483416, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ovy8i")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
+transform = Transform3D(-0.8660254, -0.11417545, 0.48678952, 0, 0.97357893, 0.22835086, -0.50000006, 0.19775765, -0.84314406, 0, 0, 0)
+light_color = Color(0.99083406, 0.3667979, 0.33354944, 1)
+shadow_enabled = true
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_ovy8i")
+
+[node name="Meshes" type="Node" parent="NavigationRegion3D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.559614, 2.0862226, 26.846077)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Meshes/StaticBody3D"]
+transform = Transform3D(5.9911838, 0, 0, 0, 5.9911838, 0, 0, 0, 28.846123, 0, 0, 0)
+mesh = SubResource("BoxMesh_ovy8i")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Meshes/StaticBody3D"]
+shape = SubResource("BoxShape3D_ovy8i")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="NavigationRegion3D/Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.488872, 2.0862226, 26.846077)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Meshes/StaticBody3D2"]
+transform = Transform3D(5.9911838, 0, 0, 0, 4.2251124, 0, 0, 0, 28.846123, 0, -0.9729223, 0)
+mesh = SubResource("BoxMesh_ovy8i")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Meshes/StaticBody3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9351349, 0)
+shape = SubResource("BoxShape3D_ovy8i")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D"]
+transform = Transform3D(21.114777, 0, 0, 0, 1, 0, 0, 0, 104.447174, 0, -0.87640524, 0)
+mesh = SubResource("PlaneMesh_ovy8i")
+skeleton = NodePath("../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D"]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1, -0.011779784, -0.84964395, -0.22076416)
+shape = SubResource("BoxShape3D_10lpn")
+
+[node name="roundManager" parent="." instance=ExtResource("4_vh5rs")]
+enemy_scene = ExtResource("3_d8tg7")
+spawn_points = Array[NodePath]([NodePath("../SpawnPoints/spawnPoint"), NodePath("../SpawnPoints/spawnPoint2"), NodePath("../SpawnPoints/spawnPoint3"), NodePath("../SpawnPoints/spawnPoint4")])
+
+[node name="SpawnPoints" type="Node" parent="."]
+
+[node name="spawnPoint" type="Marker3D" parent="SpawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.8086786, 0, 5.2201357)
+
+[node name="spawnPoint2" type="Marker3D" parent="SpawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.8086786, 0, -3.9082851)
+
+[node name="spawnPoint3" type="Marker3D" parent="SpawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.357873, 0, -3.9082851)
+
+[node name="spawnPoint4" type="Marker3D" parent="SpawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.357873, 0, 4.5401497)

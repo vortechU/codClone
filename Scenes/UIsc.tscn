@@ -1,0 +1,131 @@
+[gd_scene load_steps=8 format=3 uid="uid://b4ymtrullq2dh"]
+
+[ext_resource type="Script" uid="uid://d4j3tjt1fkrjt" path="res://Scenes/u_isc.gd" id="1_vd4sq"]
+
+[sub_resource type="Animation" id="Animation_rywhe"]
+length = 0.04
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.02, 0.04),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 0), Color(1, 0, 0, 0.39215687), Color(1, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_vd4sq"]
+resource_name = "hitEffect"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.19999999, 0.39999998),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 0), Color(1, 0, 0, 0.4627451), Color(1, 0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qcyp1"]
+_data = {
+&"RESET": SubResource("Animation_rywhe"),
+&"hitEffect": SubResource("Animation_vd4sq")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_vd4sq"]
+font_size = 20
+font_color = Color(1, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_rywhe"]
+font_size = 22
+
+[sub_resource type="LabelSettings" id="LabelSettings_qcyp1"]
+font_size = 20
+
+[node name="UI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vd4sq")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="healthBar" type="ProgressBar" parent="CanvasLayer"]
+offset_right = 380.0
+offset_bottom = 41.0
+tooltip_text = "Health"
+value = 50.0
+show_percentage = false
+
+[node name="Reticle" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -3.0
+offset_top = -3.0
+offset_right = 3.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="killEffect" type="ColorRect" parent="CanvasLayer" groups=["ui"]]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/killEffect"]
+libraries = {
+&"": SubResource("AnimationLibrary_qcyp1")
+}
+
+[node name="pointsNum" type="Label" parent="CanvasLayer"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_right = 57.0
+offset_bottom = 11.5
+grow_vertical = 2
+text = "Points: "
+label_settings = SubResource("LabelSettings_vd4sq")
+uppercase = true
+
+[node name="AmmoCount" type="Label" parent="CanvasLayer"]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -43.0
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 0
+grow_vertical = 2
+text = "00/00"
+label_settings = SubResource("LabelSettings_rywhe")
+
+[node name="roundCount" type="Label" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_top = 0.41700003
+anchor_bottom = 0.41700003
+offset_top = -14.216003
+offset_right = 74.0
+offset_bottom = 13.783997
+grow_vertical = 2
+text = "Round: "
+label_settings = SubResource("LabelSettings_qcyp1")

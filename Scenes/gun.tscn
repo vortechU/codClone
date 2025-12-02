@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://q3h8qlo4jt4r"]
+
+[ext_resource type="PackedScene" uid="uid://ds336h7t1cvmn" path="res://Meshes/AK47.fbx" id="1_nxj5y"]
+[ext_resource type="Script" uid="uid://dlf4sw4uwcsvn" path="res://Scenes/gun.gd" id="2_oqrbh"]
+
+[sub_resource type="Animation" id="Animation_t6ynv"]
+length = 0.001
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AK_47")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0)
+
+[sub_resource type="Animation" id="Animation_oqrbh"]
+resource_name = "Shoot"
+length = 0.1
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AK_47")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 0.05, 1, 0, 0, 0.03, 0.1, 1, 0, 0, 0)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_k4teu"]
+_data = {
+&"RESET": SubResource("Animation_t6ynv"),
+&"Shoot": SubResource("Animation_oqrbh")
+}
+
+[node name="Gun" instance=ExtResource("1_nxj5y")]
+script = ExtResource("2_oqrbh")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AK_47" index="4"]
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_k4teu")
+}
+
+[node name="RayCast3D" type="RayCast3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, -2.015991e-08, -1, 0, 0.46120495, -4.371139e-08, 0, 0, 0)
