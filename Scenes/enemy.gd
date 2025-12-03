@@ -89,9 +89,7 @@ func _on_enemy_died(_instigator: Node = null) -> void:
     var spawn_pos: Vector3 = global_position
     # TEST MODE: Always spawn a power-up on death to visualize gameplay flow.
     # To revert to chance-based drops, replace this block with:
-    # if power_up_scenes.size() > 0 and randf() < power_up_drop_chance:
-    #     _drop_power_up_at(spawn_pos)
-    if power_up_scenes.size() > 0:
+    if power_up_scenes.size() > 0 and randf() < power_up_drop_chance:
         _drop_power_up_at(spawn_pos)
     queue_free()
 
