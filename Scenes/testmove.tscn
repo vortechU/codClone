@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://c5xepllrqhwxb"]
+
+[ext_resource type="PackedScene" uid="uid://cv1xymwpsfdhv" path="res://Scenes/player_3d.tscn" id="1_7gayt"]
+[ext_resource type="PackedScene" uid="uid://cns0pvih2o6fm" path="res://Scenes/enemy.tscn" id="2_3oxgr"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.98275757, 0, 0)
+use_collision = true
+size = Vector3(14.244385, 1, 33.68164)
+
+[node name="Player3D" parent="." instance=ExtResource("1_7gayt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.579476, 0)
+
+[node name="Enemy" parent="." instance=ExtResource("2_3oxgr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6277828, 1.5397195, 6.6316752)

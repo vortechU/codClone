@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://bv7aeo8bo1lv5"]
+
+[ext_resource type="PackedScene" uid="uid://baesmlr8xofo1" path="res://Meshes/nature/glTF/DeadTree_2.gltf" id="1_1hy7v"]
+
+[node name="DTree2" instance=ExtResource("1_1hy7v")]

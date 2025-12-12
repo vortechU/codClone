@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://de81d2rqig7wh"]
+
+[ext_resource type="PackedScene" uid="uid://cwht7ifdu1gbr" path="res://Meshes/nature/glTF/CommonTree_2.gltf" id="1_d2hat"]
+
+[node name="Tree2" instance=ExtResource("1_d2hat")]
