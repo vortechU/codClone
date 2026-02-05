@@ -42,6 +42,8 @@ func _ready() -> void:
 	if RoundManager:
 		RoundManager.round_started.connect(_on_round_started)
 		RoundManager.round_cleared.connect(_on_round_cleared)
+		print("[UI] Connected to RoundManager signals")
+		print("[UI] round_cleared signal connections: ", RoundManager.round_cleared.get_connections())
 		# Initialize label if a round is already set
 		if round_label:
 			print("[UI] Round label connected. Current round: ", RoundManager.current_round)
@@ -79,8 +81,9 @@ func _on_round_started(round_number: int) -> void:
 		round_label.text = "Round: " + str(round_number)
 		print("[UI] Round label updated to: ", round_label.text)
 
-func _on_round_cleared(_round_number: int) -> void:
-	# Optional: flash or show message; keep label at current round
-	round_label.text = "Round: " + str(RoundManager.current_round)
+func _on_round_cleared(round_number: int) -> void:
+	print("[UI] _on_round_cleared called! Round ", round_number, " cleared!")
+	# The round_started signal will update the label when the next round begins
+	# This is just for feedback/effects if needed
     
         

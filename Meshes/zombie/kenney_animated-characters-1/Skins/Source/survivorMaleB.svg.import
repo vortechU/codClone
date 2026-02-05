@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://clljrm1a527fg"
-path="res://.godot/imported/ui.png-83fc714d779cfc93404eaf5e8d88b1b0.ctex"
+uid="uid://bfm0q8v7vo1ko"
+path="res://.godot/imported/survivorMaleB.svg-d98dc220c0555cc4d68b6dbc9ee0d1db.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/addons/ui.png"
-dest_files=["res://.godot/imported/ui.png-83fc714d779cfc93404eaf5e8d88b1b0.ctex"]
+source_file="res://Meshes/zombie/kenney_animated-characters-1/Skins/Source/survivorMaleB.svg"
+dest_files=["res://.godot/imported/survivorMaleB.svg-d98dc220c0555cc4d68b6dbc9ee0d1db.ctex"]
 
 [params]
 
@@ -38,3 +38,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

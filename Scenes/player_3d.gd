@@ -3,7 +3,7 @@ extends CharacterBody3D
 #player paramaters
 const SPEED = 5.0
 const SPRINT_SPEED = 8.0
-const JUMP_VELOCITY = 4.5
+const JUMP_VELOCITY = 3.5
 const ACCELERATION = 10.0
 const FRICTION = 15.0
 
@@ -104,7 +104,7 @@ func _apply_camera_effects(delta: float, input_dir: Vector2) -> void:
 		was_in_air = true
 	elif was_in_air:
 		# Just landed - small camera dip
-		camera.position.y = -0.1
+		camera.position.y = -0.2
 		was_in_air = false
 
 func _input(event):

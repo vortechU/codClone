@@ -32,6 +32,16 @@ _data = {
 
 [node name="Gun" instance=ExtResource("1_nxj5y")]
 script = ExtResource("2_oqrbh")
+damage = null
+fire_rate = null
+max_ammo = null
+reserve_ammo = null
+reload_time = null
+gun_range = null
+weapon_bob_speed = null
+weapon_bob_amount = null
+ads_fov = null
+ads_speed = null
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="AK_47" index="4"]
 root_node = NodePath("../..")

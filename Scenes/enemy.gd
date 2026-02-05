@@ -14,6 +14,9 @@ var player = null
 @onready var health: Health = null
 
 var attack_timer: float = 0.0
+var zombie_sound: AudioStreamPlayer3D = null
+var sound_timer: float = 0.0
+var sound_interval: float = 3.0
 
 
 func _ready():
@@ -39,6 +42,10 @@ func _ready():
         health.name = "Health"
         add_child(health)
     health.died.connect(_on_enemy_died)
+    
+    # Get zombie sound node
+    zombie_sound = get_node_or_null("zombieSound")
+    sound_timer = randf() * sound_interval  # Randomize initial timer
 
 
 func _physics_process(delta: float) -> void:
@@ -47,6 +54,19 @@ func _physics_process(delta: float) -> void:
         return
 
     var distance_to_player = global_transform.origin.distance_to(player.global_transform.origin)
+    
+    # Zombie sound timer
+    sound_timer -= delta
+    if sound_timer <= 0.0 and zombie_sound:
+        zombie_sound.play()
+        sound_timer = sound_interval
+    
+    # Make enemy look at player (rotate only on Y axis to face player)
+    var direction_to_player = player.global_transform.origin - global_transform.origin
+    direction_to_player.y = 0  # Keep on horizontal plane
+    if direction_to_player.length() > 0.001:
+        var target_rotation = atan2(direction_to_player.x, direction_to_player.z)
+        rotation.y = lerp_angle(rotation.y, target_rotation, delta * 10.0)
 
     # Always follow the player by default; stop only to attack in range
     if distance_to_player <= attack_radius:
