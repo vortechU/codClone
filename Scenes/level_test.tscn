@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://bw5s0cjlg4w0k"]
+[gd_scene load_steps=26 format=4 uid="uid://bw5s0cjlg4w0k"]
 
 [ext_resource type="PackedScene" uid="uid://cv1xymwpsfdhv" path="res://Scenes/player_3d.tscn" id="1_10lpn"]
 [ext_resource type="Texture2D" uid="uid://2ylblo15qcta" path="res://HDRIs/citrus_orchard_road_puresky_4k.hdr" id="2_ovy8i"]
@@ -14,8 +14,6 @@
 [ext_resource type="PackedScene" uid="uid://bldy2d037k63x" path="res://Scenes/meshScenes/tree_1.tscn" id="7_vawcc"]
 [ext_resource type="PackedScene" uid="uid://de81d2rqig7wh" path="res://Scenes/meshScenes/tree_2.tscn" id="8_fcvc8"]
 [ext_resource type="PackedScene" uid="uid://cduglp36fxi36" path="res://Scenes/meshScenes/tree_3.tscn" id="9_d6i86"]
-[ext_resource type="PackedScene" uid="uid://c8utvj6jshnuw" path="res://Scenes/character_medium.tscn" id="15_uvmb0"]
-[ext_resource type="PackedScene" uid="uid://c2cm53fchb0yk" path="res://Scenes/characterMesh.tscn" id="16_wlmo3"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_d8tg7"]
 panorama = ExtResource("2_ovy8i")
@@ -198,9 +196,3 @@ sgt_tool_shape = {
 }
 metadata/_custom_type_script = "uid://2juaclm8gc1n"
 metadata/SimpleGrassTextured = "2.0.5"
-
-[node name="characterMedium" parent="." instance=ExtResource("15_uvmb0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.472963, -0.75540566, -3.4765773)
-
-[node name="GodotRobot3rdPersonShooterFinal" parent="." instance=ExtResource("16_wlmo3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.004096, -0.75540566, -0.82522297)

@@ -129,3 +129,44 @@ offset_bottom = 13.783997
 grow_vertical = 2
 text = "Round: "
 label_settings = SubResource("LabelSettings_qcyp1")
+
+[node name="loseCondition" type="ColorRect" parent="CanvasLayer"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.22544421, 5.136403e-05, 0.23920362, 0.5294118)
+
+[node name="TryAgain" type="Button" parent="CanvasLayer/loseCondition" groups=["ui"]]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Try again"
+
+[node name="DeathText" type="Label" parent="CanvasLayer/loseCondition"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -106.0
+offset_top = -76.0
+offset_right = 106.0
+offset_bottom = -53.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "You have been brain rotted"
+
+[connection signal="pressed" from="CanvasLayer/loseCondition/TryAgain" to="." method="_on_try_again_pressed"]

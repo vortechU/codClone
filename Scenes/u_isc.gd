@@ -67,9 +67,11 @@ func _on_player_health_changed(current: int, max_health: int) -> void:
 		hit_effect.play("hitEffect")
 
 func _on_player_died(_instigator: Node = null) -> void:
-	# Player died - could show death screen, game over UI, etc.
+	# Show death screen UI - player handles its own state
 	if health_bar:
 		health_bar.value = 0
+	
+	$CanvasLayer/loseCondition.visible = true
 
 func _on_player_points_changed(new_points: int) -> void:
 	if points_label:
@@ -87,3 +89,6 @@ func _on_round_cleared(round_number: int) -> void:
 	# This is just for feedback/effects if needed
     
         
+
+func _on_try_again_pressed() -> void:
+	get_tree().reload_current_scene()

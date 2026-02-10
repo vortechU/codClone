@@ -25,6 +25,9 @@ var camera_bob_time = 0.0
 var was_in_air = false
 var has_double_jumped = false
 func _ready():
+	# Add player to the "Player" group so UI can find it
+	add_to_group("Player")
+	
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	if camera:
 		camera.fov = BASE_FOV
@@ -133,8 +136,11 @@ func _on_health_changed(_current: int, _max: int) -> void:
 	pass
 
 func _on_player_died(_instigator: Node = null) -> void:
-	# Simple respawn: reload current scene
-	get_tree().reload_current_scene()
+	# Disable player controls when dead
+	set_physics_process(false)
+	set_process_input(false)
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	print("Player died! Death screen should now be visible.")
 
 
 func doubleJump():
