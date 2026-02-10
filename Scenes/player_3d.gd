@@ -154,4 +154,17 @@ func doubleJump():
 func add_points(amount: int) -> void:
 	points += amount
 	emit_signal("points_changed", points)
+
+func on_enemy_killed() -> void:
+	# Called whenever an enemy is killed
+	# Add your logic here (e.g., award points, update stats, etc.)
+	print("Enemy killed! Player notified.")
+	
+	# Add 2 seconds to battery timer (capped at max wait_time)
+	var battery = $Battery
+	if battery and not battery.is_stopped():
+		var new_time = battery.time_left + 2.0
+		new_time = min(new_time, battery.wait_time)  # Cap at max time
+		battery.start(new_time)  # Restart with extended time
+
 	

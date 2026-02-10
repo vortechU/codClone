@@ -4,9 +4,11 @@ extends Control
 @onready var hit_effect: AnimationPlayer = $CanvasLayer/killEffect/AnimationPlayer
 @onready var points_label: Label = $CanvasLayer/pointsNum
 @onready var round_label: Label = $CanvasLayer/roundCount
+@onready var bestScore: Label = $CanvasLayer/loseCondition/BestScore
 
 var player: CharacterBody3D = null
 var health: Health = null
+var playerBattery: Timer = null
 
 func _ready() -> void:
 	# Find the player in the scene
@@ -20,6 +22,7 @@ func _ready() -> void:
 	
 	if player:
 		health = player.get_node_or_null("Health")
+		playerBattery = player.get_node_or_null("Battery")
 		
 		if health:
 			# Connect to player's health signals
@@ -53,7 +56,17 @@ func _ready() -> void:
 				round_label.text = "Round: --"
 	else:
 		print("[UI] ERROR: RoundManager autoload not found!")
-		
+
+
+func _process(_delta):
+	# Update the UI every frame
+	if playerBattery:
+		$CanvasLayer/BatteryBar.value = (playerBattery.time_left / playerBattery.wait_time) * 100
+
+		# Check for death by darkness
+		if playerBattery.is_stopped():
+			if health:
+				health.take_damage(9999, self)  # Instantly kill the player
 
 func _on_player_health_changed(current: int, max_health: int) -> void:
 	if health_bar:
@@ -72,6 +85,7 @@ func _on_player_died(_instigator: Node = null) -> void:
 		health_bar.value = 0
 	
 	$CanvasLayer/loseCondition.visible = true
+	bestScore.text = "Best Score: " + str(player.points)
 
 func _on_player_points_changed(new_points: int) -> void:
 	if points_label:
@@ -87,8 +101,8 @@ func _on_round_cleared(round_number: int) -> void:
 	print("[UI] _on_round_cleared called! Round ", round_number, " cleared!")
 	# The round_started signal will update the label when the next round begins
 	# This is just for feedback/effects if needed
-    
-        
+	
+		
 
 func _on_try_again_pressed() -> void:
 	get_tree().reload_current_scene()

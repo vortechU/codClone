@@ -20,8 +20,14 @@ var alive_enemies: int = 0
 var total_to_spawn: int = 0
 var spawned_this_round: int = 0
 var _spawn_timer: Timer
+var player = null
 
 func _ready() -> void:
+	# Get player reference from scene tree
+	player = get_tree().get_first_node_in_group("Player")
+	if player == null:
+		print("Warning: Player not found in RoundManager")
+	
 	_spawn_timer = Timer.new()
 	_spawn_timer.wait_time = spawn_interval
 	_spawn_timer.one_shot = false
@@ -68,6 +74,11 @@ func _on_spawn_tick() -> void:
 	# Ensure enemy in enemies group for power-ups like nuke
 	if enemy and not enemy.is_in_group("enemies"):
 		enemy.add_to_group("enemies")
+
+	# Connect enemy death signal to award points to player
+	if enemy.has_signal("enemy_died"):
+		enemy.enemy_died.connect(_on_enemy_killed)
+	
 	# Place and add under spawn point's parent (usually level/root)
 	enemy.global_transform = sp.global_transform
 	sp.get_parent().add_child(enemy)
@@ -79,6 +90,11 @@ func _on_spawn_tick() -> void:
 	var health: Node = enemy.get_node_or_null("Health")
 	if health and health.has_signal("died"):
 		health.connect("died", _on_enemy_died)
+
+func _on_enemy_killed() -> void:
+	# Call player's on_enemy_killed function
+	if player and player.has_method("on_enemy_killed"):
+		player.on_enemy_killed()
 
 func _on_enemy_died(_instigator: Node = null) -> void:
 	alive_enemies = max(0, alive_enemies - 1)

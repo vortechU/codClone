@@ -12,7 +12,7 @@ var player = null
 @export var power_up_scenes: Array[PackedScene] = []  # Assign power-up scenes in editor
 @onready var nav_agent = $NavigationAgent3D
 @onready var health: Health = null
-
+signal enemy_died()
 var attack_timer: float = 0.0
 var zombie_sound: AudioStreamPlayer3D = null
 var sound_timer: float = 0.0
@@ -106,6 +106,7 @@ func _physics_process(delta: float) -> void:
 
 func _on_enemy_died(_instigator: Node = null) -> void:
     # Cache position early (signal may arrive after node starts leaving tree)
+    enemy_died.emit()  # Notify any listeners (e.g. RoundManager)
     var spawn_pos: Vector3 = global_position
     # TEST MODE: Always spawn a power-up on death to visualize gameplay flow.
     # To revert to chance-based drops, replace this block with:

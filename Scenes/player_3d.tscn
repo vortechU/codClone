@@ -27,3 +27,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.38941622, -0.1449616, -0.71
 [node name="Health" parent="." instance=ExtResource("2_85mps")]
 
 [node name="UI" parent="." instance=ExtResource("4_hsehg")]
+
+[node name="Battery" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+autostart = true
