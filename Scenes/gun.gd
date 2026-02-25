@@ -100,6 +100,7 @@ func shoot() -> void:
 		return
 	
 	current_ammo -= 1
+	$shootSound.play()
 	_update_ammo_display()
 	ammo_changed.emit(current_ammo, reserve_ammo)
 	weapon_fired.emit()
@@ -122,6 +123,7 @@ func shoot() -> void:
 	
 	# Auto reload if empty
 	if current_ammo == 0:
+		$emptySound.play()
 		reload()
 
 func _fire_raycast() -> void:

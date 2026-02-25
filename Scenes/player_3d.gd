@@ -14,6 +14,11 @@ const BASE_FOV = 75.0
 const FOV_CHANGE = 10.0
 const TILT_AMOUNT = 2.0
 
+# Gamepad camera control
+const ROTATION_SPEED = 0.05
+const MAX_PITCH = 89.0
+const JOY_DEADZONE = 0.2
+
 @onready var camera = $Camera3D
 @onready var health: Health = null
 #initiate the points system
@@ -52,7 +57,7 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta
 
 	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+	if Input.is_action_just_pressed("Jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 
 	# Handle movement input
@@ -72,9 +77,6 @@ func _physics_process(delta: float) -> void:
 	# Camera effects
 	_apply_camera_effects(delta, input_dir)
 
-	# Toggle mouse mode / quit (use just_pressed to avoid repeat)
-	if Input.is_action_just_pressed("ui_cancel"):
-		get_tree().quit()
 
 
 	move_and_slide()
@@ -111,6 +113,7 @@ func _apply_camera_effects(delta: float, input_dir: Vector2) -> void:
 		was_in_air = false
 
 func _input(event):
+
 	if event is InputEventMouseMotion and camera:
 		rotate_y(deg_to_rad(-event.relative.x * 0.1))
 		var camera_rotation = camera.rotation_degrees
@@ -123,6 +126,23 @@ func _input(event):
 			health.take_damage(5, self)
 		elif event.keycode == KEY_J and health:
 			health.heal(5, self)
+	if event is InputEventJoypadMotion:
+		# Right stick horizontal (X-axis)
+		if event.get_axis() == JOY_AXIS_RIGHT_X:
+			var x_input = event.get_axis_value()
+			if abs(x_input) > JOY_DEADZONE:
+				# Apply rotation to camera or player head
+				rotate_y(-x_input * ROTATION_SPEED)
+		
+		# Right stick vertical (Y-axis)
+		if event.get_axis() == JOY_AXIS_RIGHT_Y:
+			var y_input = event.get_axis_value()
+			if abs(y_input) > JOY_DEADZONE:
+				# Apply pitch rotation (clamp to prevent flipping)
+				var cam_rot = camera.rotation_degrees
+				var new_pitch = cam_rot.x + (-y_input * ROTATION_SPEED)
+				cam_rot.x = clamp(new_pitch, -MAX_PITCH, MAX_PITCH)
+				camera.rotation_degrees = cam_rot
 
 func apply_camera_recoil(amount: float) -> void:
 	if camera:
@@ -139,12 +159,13 @@ func _on_player_died(_instigator: Node = null) -> void:
 	# Disable player controls when dead
 	set_physics_process(false)
 	set_process_input(false)
+	Engine.time_scale = 0.3  # Slow down time for dramatic effect
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	print("Player died! Death screen should now be visible.")
 
 
 func doubleJump():
-	if Input.is_action_just_pressed("ui_accept") and not is_on_floor() and not has_double_jumped:
+	if Input.is_action_just_pressed("Jump") and not is_on_floor() and not has_double_jumped:
 		velocity.y = JUMP_VELOCITY * 1.5
 		has_double_jumped = true
 	if is_on_floor():

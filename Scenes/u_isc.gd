@@ -12,6 +12,10 @@ var playerBattery: Timer = null
 
 func _ready() -> void:
 	# Find the player in the scene
+	process_mode = Node.PROCESS_MODE_ALWAYS
+	var pause_menu = $CanvasLayer/PauseMenu
+	if pause_menu:
+		pause_menu.process_mode = Node.PROCESS_MODE_WHEN_PAUSED
 	var players = get_tree().get_nodes_in_group("Player")
 	if players.size() > 0:
 		player = players[0]
@@ -68,6 +72,10 @@ func _process(_delta):
 			if health:
 				health.take_damage(9999, self)  # Instantly kill the player
 
+
+
+
+
 func _on_player_health_changed(current: int, max_health: int) -> void:
 	if health_bar:
 		health_bar.max_value = max_health
@@ -85,7 +93,10 @@ func _on_player_died(_instigator: Node = null) -> void:
 		health_bar.value = 0
 	
 	$CanvasLayer/loseCondition.visible = true
-	bestScore.text = "Best Score: " + str(player.points)
+	var highScore = SaveManager.load_score()
+	bestScore.text = "Best Score: " + str(highScore)
+	if player.points >= highScore:
+		SaveManager.save_score(player.points)
 
 func _on_player_points_changed(new_points: int) -> void:
 	if points_label:
@@ -105,4 +116,30 @@ func _on_round_cleared(round_number: int) -> void:
 		
 
 func _on_try_again_pressed() -> void:
+	Engine.time_scale = 1.0  # Ensure time scale is reset
 	get_tree().reload_current_scene()
+
+
+func _on_bt_resume_pressed() -> void:
+	_set_paused(false)
+
+func _set_paused(paused: bool) -> void:
+	get_tree().paused = paused
+	var pause_menu = $CanvasLayer/PauseMenu
+	if pause_menu:
+		pause_menu.visible = paused
+	set_physics_process(not paused)
+	set_process(not paused)
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE if paused else Input.MOUSE_MODE_CAPTURED)
+
+func _input(_event) -> void:
+	if Input.is_action_just_pressed("Pause"):
+		_set_paused(not get_tree().paused)
+		return
+
+func _on_bt_mainmenu_pressed() -> void:
+	_set_paused(false)
+	#show mouse cursor before changing scene
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")
+	

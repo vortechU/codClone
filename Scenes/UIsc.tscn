@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://b4ymtrullq2dh"]
+[gd_scene format=3 uid="uid://b4ymtrullq2dh"]
 
 [ext_resource type="Script" uid="uid://d4j3tjt1fkrjt" path="res://Scenes/u_isc.gd" id="1_vd4sq"]
+[ext_resource type="Shader" uid="uid://durt4uyaadv0y" path="res://Scenes/Shaders/vigShader.gdshader" id="2_rywhe"]
 
 [sub_resource type="Animation" id="Animation_rywhe"]
 length = 0.04
@@ -49,7 +50,13 @@ font_size = 22
 [sub_resource type="LabelSettings" id="LabelSettings_qcyp1"]
 font_size = 20
 
-[node name="UI" type="Control"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vd4sq"]
+shader = ExtResource("2_rywhe")
+shader_parameter/vignette_intensity = 0.7
+shader_parameter/vignette_opacity = 0.650000030875
+shader_parameter/vignette_rgb = Color(0, 0, 0, 1)
+
+[node name="UI" type="Control" unique_id=929581769]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -58,16 +65,16 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_vd4sq")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=693992607]
 
-[node name="healthBar" type="ProgressBar" parent="CanvasLayer"]
+[node name="healthBar" type="ProgressBar" parent="CanvasLayer" unique_id=1907661035]
 offset_right = 380.0
 offset_bottom = 41.0
 tooltip_text = "Health"
 value = 50.0
 show_percentage = false
 
-[node name="Reticle" type="ColorRect" parent="CanvasLayer"]
+[node name="Reticle" type="ColorRect" parent="CanvasLayer" unique_id=13091841]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -80,7 +87,7 @@ offset_bottom = 3.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="killEffect" type="ColorRect" parent="CanvasLayer" groups=["ui"]]
+[node name="killEffect" type="ColorRect" parent="CanvasLayer" unique_id=1475740943 groups=["ui"]]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -88,12 +95,10 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 0, 0, 0)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/killEffect"]
-libraries = {
-&"": SubResource("AnimationLibrary_qcyp1")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/killEffect" unique_id=1957303513]
+libraries/ = SubResource("AnimationLibrary_qcyp1")
 
-[node name="pointsNum" type="Label" parent="CanvasLayer"]
+[node name="pointsNum" type="Label" parent="CanvasLayer" unique_id=637685775]
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
@@ -105,7 +110,7 @@ text = "Points: "
 label_settings = SubResource("LabelSettings_vd4sq")
 uppercase = true
 
-[node name="AmmoCount" type="Label" parent="CanvasLayer"]
+[node name="AmmoCount" type="Label" parent="CanvasLayer" unique_id=1412197809]
 anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
@@ -119,7 +124,7 @@ grow_vertical = 2
 text = "00/00"
 label_settings = SubResource("LabelSettings_rywhe")
 
-[node name="roundCount" type="Label" parent="CanvasLayer"]
+[node name="roundCount" type="Label" parent="CanvasLayer" unique_id=507951165]
 anchors_preset = -1
 anchor_top = 0.41700003
 anchor_bottom = 0.41700003
@@ -130,7 +135,7 @@ grow_vertical = 2
 text = "Round: "
 label_settings = SubResource("LabelSettings_qcyp1")
 
-[node name="BatteryBar" type="ProgressBar" parent="CanvasLayer"]
+[node name="BatteryBar" type="ProgressBar" parent="CanvasLayer" unique_id=1438895484]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -140,7 +145,7 @@ grow_horizontal = 0
 value = 100.0
 show_percentage = false
 
-[node name="loseCondition" type="ColorRect" parent="CanvasLayer"]
+[node name="loseCondition" type="ColorRect" parent="CanvasLayer" unique_id=531694484]
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
@@ -149,7 +154,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.22544421, 5.136403e-05, 0.23920362, 0.5294118)
 
-[node name="TryAgain" type="Button" parent="CanvasLayer/loseCondition" groups=["ui"]]
+[node name="TryAgain" type="Button" parent="CanvasLayer/loseCondition" unique_id=1029815165 groups=["ui"]]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -164,7 +169,7 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Try again"
 
-[node name="DeathText" type="Label" parent="CanvasLayer/loseCondition"]
+[node name="DeathText" type="Label" parent="CanvasLayer/loseCondition" unique_id=392774117]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -179,7 +184,7 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "You have been brain rotted"
 
-[node name="BestScore" type="Label" parent="CanvasLayer/loseCondition"]
+[node name="BestScore" type="Label" parent="CanvasLayer/loseCondition" unique_id=338781248]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -195,4 +200,54 @@ grow_vertical = 2
 text = "Best Score:"
 horizontal_alignment = 1
 
+[node name="PauseMenu" type="Control" parent="CanvasLayer" unique_id=1182577311]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="bt_resume" type="Button" parent="CanvasLayer/PauseMenu" unique_id=630491327]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = -62.0
+offset_right = 35.0
+offset_bottom = -31.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Resume"
+
+[node name="bt_mainmenu" type="Button" parent="CanvasLayer/PauseMenu" unique_id=1074488269]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -86.5
+offset_top = 31.0
+offset_right = 86.5
+offset_bottom = 62.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Return to Main Menu"
+
+[node name="Vingette" type="ColorRect" parent="CanvasLayer" unique_id=1811238173]
+material = SubResource("ShaderMaterial_vd4sq")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
 [connection signal="pressed" from="CanvasLayer/loseCondition/TryAgain" to="." method="_on_try_again_pressed"]
+[connection signal="pressed" from="CanvasLayer/PauseMenu/bt_resume" to="." method="_on_bt_resume_pressed"]
+[connection signal="pressed" from="CanvasLayer/PauseMenu/bt_mainmenu" to="." method="_on_bt_mainmenu_pressed"]
