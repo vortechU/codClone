@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://d0vqwk2y8yonf"]
 
 [ext_resource type="PackedScene" uid="uid://cfwfyu8ndvkhg" path="res://Scenes/IdleChar.tscn" id="1_a0wae"]
+[ext_resource type="PackedScene" uid="uid://cvdehhw3ig61n" path="res://Scenes/computer.tscn" id="2_llmbb"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_a0wae"]
 
@@ -23,7 +24,10 @@ use_collision = true
 size = Vector3(1, 1.9591064, 0.73583984)
 
 [node name="IdleChar" parent="." unique_id=282177250 instance=ExtResource("1_a0wae")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -1.6484121)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 1.5614234)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1563718357]
 environment = SubResource("Environment_vggx3")
+
+[node name="Node3D" parent="." unique_id=2028642390 instance=ExtResource("2_llmbb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7299911, 0.6317482)
