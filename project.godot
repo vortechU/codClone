@@ -46,11 +46,11 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-GameManager="*res://Scenes/gameManager.gd"
+GameManager="*res://Scenes/Scripts/gameManager.gd"
 PowerUpManager="*res://power_up_manager.gd"
-RoundManager="*res://Scenes/round_manager.gd"
+RoundManager="*res://Scenes/Scripts/round_manager.gd"
 SimpleGrass="*res://addons/simplegrasstextured/singleton.tscn"
-SaveManager="*res://Scenes/save_manager.gd"
+SaveManager="*res://Scenes/Scripts/save_manager.gd"
 
 [editor_plugins]
 

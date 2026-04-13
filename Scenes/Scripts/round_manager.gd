@@ -30,6 +30,12 @@ func _ready() -> void:
 	
 	_spawn_timer = Timer.new()
 	_spawn_timer.wait_time = spawn_interval
+	if spawn_interval > 0.1:
+		spawn_interval -= 0.1
+		_spawn_timer.wait_time = spawn_interval
+	else:
+		print("Warning: spawn_interval too low, setting to 0.1s")
+		_spawn_timer.wait_time = 0.1
 	_spawn_timer.one_shot = false
 	_spawn_timer.autostart = false
 	add_child(_spawn_timer)
@@ -104,7 +110,7 @@ func _on_enemy_died(_instigator: Node = null) -> void:
 		emit_signal("round_cleared", current_round)
 		print("Round ", current_round, " cleared.")
 		# Auto-start next round after short delay
-		await get_tree().create_timer(2.0).timeout
+		await get_tree().create_timer(1.0).timeout
 		start_round(current_round + 1)
 
 func force_clear_round() -> void:

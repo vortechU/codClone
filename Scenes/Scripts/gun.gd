@@ -100,6 +100,7 @@ func shoot() -> void:
 		return
 	
 	current_ammo -= 1
+	$shootSound.pitch_scale = randf_range(0.6, 1.2)  # Randomize pitch for variety
 	$shootSound.play()
 	_update_ammo_display()
 	ammo_changed.emit(current_ammo, reserve_ammo)

@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://cvdehhw3ig61n"]
+
+[ext_resource type="Script" uid="uid://cdc6x2fhwgkqn" path="res://Scenes/Scripts/computer.gd" id="1_4xga7"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_tlg0j"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_tlg0j"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tlg0j"]
+resource_local_to_scene = true
+albedo_texture = SubResource("ViewportTexture_tlg0j")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tlg0j"]
+size = Vector3(1, 1, 0.061523438)
+
+[node name="Node3D" type="Node3D" unique_id=2028642390]
+script = ExtResource("1_4xga7")
+
+[node name="Monitor" type="MeshInstance3D" parent="." unique_id=728702544]
+mesh = SubResource("QuadMesh_tlg0j")
+surface_material_override/0 = SubResource("StandardMaterial3D_tlg0j")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=2119027683]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1475772292]
+shape = SubResource("BoxShape3D_tlg0j")
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=1326872842]
+size = Vector2i(1920, 1080)
+
+[node name="Control" type="Control" parent="SubViewport" unique_id=1380769809]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0

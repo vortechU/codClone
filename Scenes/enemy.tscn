@@ -1,6 +1,6 @@
-[gd_scene load_steps=16 format=3 uid="uid://cns0pvih2o6fm"]
+[gd_scene format=3 uid="uid://cns0pvih2o6fm"]
 
-[ext_resource type="Script" uid="uid://dmtoct62ovlel" path="res://Scenes/enemy.gd" id="1_hghv2"]
+[ext_resource type="Script" uid="uid://dmtoct62ovlel" path="res://Scenes/Scripts/enemy.gd" id="1_hghv2"]
 [ext_resource type="PackedScene" uid="uid://bse30k5201pyh" path="res://Scenes/health.tscn" id="2_1f0kj"]
 [ext_resource type="PackedScene" uid="uid://d06afr30o5mjq" path="res://Scenes/power_up.tscn" id="2_afpow"]
 [ext_resource type="AudioStream" uid="uid://du4o1kllutrj5" path="res://Sounds/zombieMoan1.wav" id="4_ghaa6"]
@@ -42,39 +42,39 @@ emission_energy_multiplier = 2.75
 material = SubResource("StandardMaterial3D_ghaa6")
 size = Vector3(0.2, 0.2, 0.2)
 
-[node name="Enemy" type="CharacterBody3D" groups=["enemies"]]
+[node name="Enemy" type="CharacterBody3D" unique_id=133366402 groups=["enemies"]]
 script = ExtResource("1_hghv2")
 normalSpeed = 3.0
 chase_speed = 3.0
 power_up_scenes = Array[PackedScene]([ExtResource("2_afpow")])
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1325587895]
 material_override = SubResource("StandardMaterial3D_hghv2")
 mesh = SubResource("CapsuleMesh_ne65n")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1554042089]
 shape = SubResource("CapsuleShape3D_hghv2")
 
-[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=613314659]
 
-[node name="Health" parent="." instance=ExtResource("2_1f0kj")]
+[node name="Health" parent="." unique_id=385361129 instance=ExtResource("2_1f0kj")]
 
-[node name="eyes" type="Node3D" parent="."]
+[node name="eyes" type="Node3D" parent="." unique_id=306957031]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="eyes"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="eyes" unique_id=371324045]
 transform = Transform3D(0.060365796, 0, 0, 0, 0.060365796, 0, 0, 0, 0.060365796, -0.10585579, 0.49217767, 0.5046133)
 material_override = SubResource("StandardMaterial3D_afpow")
 mesh = SubResource("CapsuleMesh_afpow")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="eyes"]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="eyes" unique_id=966085947]
 transform = Transform3D(0.060365796, 0, 0, 0, 0.060365796, 0, 0, 0, 0.060365796, 0.119316354, 0.49217767, 0.5046133)
 material_override = SubResource("StandardMaterial3D_afpow")
 mesh = SubResource("CapsuleMesh_afpow")
 
-[node name="zombieSound" type="AudioStreamPlayer3D" parent="."]
+[node name="zombieSound" type="AudioStreamPlayer3D" parent="." unique_id=156428290]
 stream = SubResource("AudioStreamRandomizer_afpow")
 
-[node name="bloodFlow" type="GPUParticles3D" parent="."]
+[node name="bloodFlow" type="GPUParticles3D" parent="." unique_id=543764572]
 emitting = false
 amount = 30
 one_shot = true

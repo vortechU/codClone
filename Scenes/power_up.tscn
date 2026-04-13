@@ -1,6 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://d06afr30o5mjq"]
+[gd_scene format=3 uid="uid://d06afr30o5mjq"]
 
-[ext_resource type="Script" uid="uid://bhlbsi8arhyq3" path="res://Scenes/powerUp.gd" id="1_psa43"]
+[ext_resource type="Script" uid="uid://bhlbsi8arhyq3" path="res://Scenes/Scripts/powerUp.gd" id="1_psa43"]
 [ext_resource type="Texture2D" uid="uid://dgr4hnmdxq5pn" path="res://Textures/powerUpHolder.png" id="2_p3i06"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_psa43"]

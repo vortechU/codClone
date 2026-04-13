@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b4ymtrullq2dh"]
 
-[ext_resource type="Script" uid="uid://d4j3tjt1fkrjt" path="res://Scenes/u_isc.gd" id="1_vd4sq"]
+[ext_resource type="Script" uid="uid://d4j3tjt1fkrjt" path="res://Scenes/Scripts/u_isc.gd" id="1_vd4sq"]
 [ext_resource type="Shader" uid="uid://durt4uyaadv0y" path="res://Scenes/Shaders/vigShader.gdshader" id="2_rywhe"]
 
 [sub_resource type="Animation" id="Animation_rywhe"]

@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://d0vqwk2y8yonf"]
+
+[ext_resource type="PackedScene" uid="uid://cfwfyu8ndvkhg" path="res://Scenes/IdleChar.tscn" id="1_a0wae"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_a0wae"]
+
+[sub_resource type="Sky" id="Sky_llmbb"]
+sky_material = SubResource("ProceduralSkyMaterial_a0wae")
+
+[sub_resource type="Environment" id="Environment_vggx3"]
+background_mode = 2
+sky = SubResource("Sky_llmbb")
+
+[node name="Office" type="Node3D" unique_id=1101053179]
+
+[node name="floor" type="CSGBox3D" parent="." unique_id=334477377]
+use_collision = true
+size = Vector3(6.30249, 1, 11.391602)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=27684514]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4795532, -3.8877532)
+use_collision = true
+size = Vector3(1, 1.9591064, 0.73583984)
+
+[node name="IdleChar" parent="." unique_id=282177250 instance=ExtResource("1_a0wae")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -1.6484121)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1563718357]
+environment = SubResource("Environment_vggx3")

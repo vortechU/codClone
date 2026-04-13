@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://cfwfyu8ndvkhg"]
+
+[ext_resource type="Script" uid="uid://dastthjl7riky" path="res://Scenes/Scripts/idle_char.gd" id="1_7d4li"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_2jiqu"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7d4li"]
+
+[node name="IdleChar" type="CharacterBody3D" unique_id=282177250]
+script = ExtResource("1_7d4li")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1992765755]
+mesh = SubResource("CapsuleMesh_2jiqu")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=732484089]
+shape = SubResource("CapsuleShape3D_7d4li")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=815168314]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.34132028, -0.12498307)

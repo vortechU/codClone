@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://dywuky56e6cv3"]
+[gd_scene format=3 uid="uid://dywuky56e6cv3"]
 
-[ext_resource type="Script" uid="uid://dw08s4exm1l0g" path="res://Scenes/main_menu.gd" id="1_28flt"]
+[ext_resource type="Script" uid="uid://dw08s4exm1l0g" path="res://Scenes/Scripts/main_menu.gd" id="1_28flt"]
 
-[node name="MainMenu" type="Control"]
+[node name="MainMenu" type="Control" unique_id=1454086207]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,7 +11,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_28flt")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=827131021]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -20,7 +20,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.44203168, 0.32933238, 0.44203168, 1)
 
-[node name="Button" type="Button" parent="."]
+[node name="Button" type="Button" parent="." unique_id=1816793983]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -35,7 +35,7 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Start"
 
-[node name="Score" type="Label" parent="."]
+[node name="Score" type="Label" parent="." unique_id=1555372926]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
