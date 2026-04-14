@@ -31,21 +31,60 @@ size = Vector2i(1920, 1080)
 
 [node name="Control" type="Control" parent="SubViewport" unique_id=1380769809]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="Button" type="Button" parent="SubViewport/Control" unique_id=590532755]
+[node name="Background" type="ColorRect" parent="SubViewport/Control" unique_id=886342503]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0588235, 0.0666667, 0.0901961, 1)
+
+[node name="CenterPanel" type="PanelContainer" parent="SubViewport/Control" unique_id=722671027]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 480.0
-offset_bottom = 480.0
+offset_left = -360.0
+offset_top = -180.0
+offset_right = 360.0
+offset_bottom = 180.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Hit"
+
+[node name="EventList" type="VBoxContainer" parent="SubViewport/Control/CenterPanel" unique_id=376223966]
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="Title" type="Label" parent="SubViewport/Control/CenterPanel/EventList" unique_id=297525262]
+layout_mode = 2
+theme_override_font_sizes/font_size = 52
+text = "Terminal Event Select"
+horizontal_alignment = 1
+
+[node name="Description" type="Label" parent="SubViewport/Control/CenterPanel/EventList" unique_id=628545157]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "Choose your next operation."
+horizontal_alignment = 1
+
+[node name="EventLevelTest" type="Button" parent="SubViewport/Control/CenterPanel/EventList" unique_id=1254003058]
+custom_minimum_size = Vector2(0, 74)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Deploy: Level Test"
+metadata/event_id = "deploy_level_test"
+
+[node name="CancelButton" type="Button" parent="SubViewport/Control/CenterPanel/EventList" unique_id=1611098834]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Exit Terminal"

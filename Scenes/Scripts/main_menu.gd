@@ -1,6 +1,6 @@
 extends Control
 @onready var scoreLabel: Label = $Score
-@onready var loadedScene: PackedScene = preload("res://Scenes/level_test.tscn")
+@onready var loadedScene: PackedScene = preload("res://Scenes/office.tscn")
 func _ready() -> void:
 	var highScore = SaveManager.load_score()
 	scoreLabel.text = "Best Score: " + str(highScore)
