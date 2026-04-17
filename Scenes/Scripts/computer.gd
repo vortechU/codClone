@@ -12,6 +12,7 @@ const EVENT_SCENES := {
 	"deploy_level_test": "res://Scenes/level_test.tscn"
 }
 const FADE_DURATION_SECONDS := 0.35
+const MATRIX_TRANSITION_SHADER := preload("res://Scenes/Shaders/matrix_transition.gdshader")
 
 var active_operator: Node = null
 var _last_viewport_position: Vector2 = Vector2.ZERO
@@ -123,10 +124,10 @@ func _fade_to_black(duration_seconds: float) -> void:
 		return
 
 	_fade_rect.visible = true
-	_fade_rect.color = Color(0, 0, 0, 0)
+	_set_transition_progress(0.0)
 
 	var tween := create_tween()
-	tween.tween_property(_fade_rect, "color:a", 1.0, duration_seconds)
+	tween.tween_method(_set_transition_progress, 0.0, 1.0, duration_seconds)
 	await tween.finished
 
 
@@ -147,6 +148,7 @@ func _ensure_fade_overlay() -> void:
 	_fade_rect.set_anchors_preset(Control.PRESET_FULL_RECT)
 	_fade_rect.color = Color(0, 0, 0, 0)
 	_fade_rect.mouse_filter = Control.MOUSE_FILTER_STOP
+	_attach_transition_shader()
 
 	_fade_layer.add_child(_fade_rect)
 	scene_root.add_child(_fade_layer)
@@ -154,8 +156,35 @@ func _ensure_fade_overlay() -> void:
 
 func _reset_fade_overlay() -> void:
 	if _fade_rect != null and is_instance_valid(_fade_rect):
-		_fade_rect.color = Color(0, 0, 0, 0)
+		_set_transition_progress(0.0)
 		_fade_rect.visible = false
+
+
+func _attach_transition_shader() -> void:
+	if _fade_rect == null:
+		return
+
+	if MATRIX_TRANSITION_SHADER == null:
+		push_warning("[Computer] Missing Matrix transition shader")
+		return
+
+	var shader_material := ShaderMaterial.new()
+	shader_material.shader = MATRIX_TRANSITION_SHADER
+	shader_material.set_shader_parameter("progress", 0.0)
+	_fade_rect.material = shader_material
+
+
+func _set_transition_progress(value: float) -> void:
+	if _fade_rect == null:
+		return
+
+	var clamped_value := clampf(value, 0.0, 1.0)
+
+	if _fade_rect.material is ShaderMaterial:
+		(_fade_rect.material as ShaderMaterial).set_shader_parameter("progress", clamped_value)
+
+	# Keep alpha fallback so scene changes still fade if shader fails.
+	_fade_rect.color.a = clamped_value
 
 
 func forward_mouse_button(world_position: Vector3, button_index: int, pressed: bool, button_mask: int = 0, double_click: bool = false) -> void:

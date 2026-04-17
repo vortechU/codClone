@@ -51,7 +51,8 @@ PowerUpManager="*res://power_up_manager.gd"
 RoundManager="*res://Scenes/Scripts/round_manager.gd"
 SimpleGrass="*res://addons/simplegrasstextured/singleton.tscn"
 SaveManager="*res://Scenes/Scripts/save_manager.gd"
-DialogueManager="*uid://c3rodes2l3gxb"
+DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
+VisualStyleManager="*res://Scenes/Scripts/visual_style_manager.gd"
 
 [editor_plugins]
 

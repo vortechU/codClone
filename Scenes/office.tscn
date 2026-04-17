@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://cfwfyu8ndvkhg" path="res://Scenes/IdleChar.tscn" id="1_a0wae"]
 [ext_resource type="PackedScene" uid="uid://cvdehhw3ig61n" path="res://Scenes/computer.tscn" id="2_llmbb"]
+[ext_resource type="PackedScene" uid="uid://b27clyqfvj3qq" path="res://Meshes/monitor.tscn" id="3_vggx3"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_a0wae"]
 
@@ -30,4 +31,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 1.5614234)
 environment = SubResource("Environment_vggx3")
 
 [node name="Node3D" parent="." unique_id=2028642390 instance=ExtResource("2_llmbb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7299911, 0.6317482)
+transform = Transform3D(0.9863253, 0, 0, 0, 0.8007399, 0, 0, 0, 1, 0, 1.7299911, 0.61990345)
+
+[node name="MONITOR" parent="." unique_id=1703731858 instance=ExtResource("3_vggx3")]
+transform = Transform3D(-8.742278e-08, 4.4408879e-16, -2, 8.742277e-08, 2, -3.3772817e-15, 2, -8.742277e-08, -8.742278e-08, 0.11768675, 1.7374705, 0.09967524)
